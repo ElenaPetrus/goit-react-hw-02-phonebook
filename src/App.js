@@ -18,6 +18,14 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidUpdate() {
+    if (
+      this.getVisibleContacts().length === 0 &&
+      this.state.contacts.length > 0
+    )
+      alert('Соntact is not on the ContactList');
+  }
+
   addContact = ({ name, number }) => {
     const contact = {
       id: shortid.generate(),
@@ -51,27 +59,16 @@ class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  // getVisibleContacts = () => {
-  //   const { filter, contacts } = this.state;
-  //   const normalizedFilter = filter.toLowerCase();
-
-  //   if (contacts.find(contact => contact.name.toLowerCase() === filter.toLowerCase(),)) {
-
-  //     contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilter),)
-  //   } else if (contacts.find(contact => contact.number === filter)){
-  //     contacts.filter(contact =>
-  //       contact.number.includes(filter),)
-  //   } else {
-  //      alert (`Соntact ${filter} is not on the ContactList`)}
-  // };
+  //
 
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
+    return contacts.filter(
+      contact =>
+        contact.name.toLowerCase().includes(normalizedFilter) ||
+        contact.number.includes(filter),
     );
   };
 
@@ -90,7 +87,6 @@ class App extends Component {
         <h2 className={s.title}>Contacts</h2>
 
         <Filter value={filter} onChange={this.changeFilter} />
-
         <ContactList
           contacts={visibleContacts}
           onDeleteContact={this.deleteContact}
