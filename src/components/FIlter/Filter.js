@@ -7,7 +7,7 @@ function Filter({ value, onChange }) {
   //  replace(/ /g, '')
   return (
     <label className={s.label} htmlFor={inputId}>
-      Find contacts by name
+      Find contact by name/number
       <input
         className={s.input}
         id={inputId}
