@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { ContactForm } from './components/ContactForm/ContactForm';
 import { Filter } from './components/FIlter/Filter';
 import { ContactList } from './components/ContactList/ContactList';
+import s from './App.module.css';
 import shortid from 'shortid';
 
 class App extends Component {
@@ -80,13 +81,13 @@ class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div className="container">
-        <h1>Phonebook</h1>
-        <span> Total contacts:{totalContactCount}</span>
+      <div className={s.container}>
+        <h1 className={s.title}>Phonebook</h1>
+        <span> Total contacts: {totalContactCount}</span>
 
         <ContactForm onSubmit={this.addContact} />
 
-        <h2>Contacts</h2>
+        <h2 className={s.title}>Contacts</h2>
 
         <Filter value={filter} onChange={this.changeFilter} />
 
